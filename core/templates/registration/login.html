@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicPro</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/core/icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/core/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/core/icon/favicon-16x16.png">
+    <link rel="manifest" href="/static/core/icon/site.webmanifest">
+
+</head>
+<body>
+    {% load crispy_forms_tags %}
+    <div class="container">
+        <br><br>
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Iniciar Sesion</h2>
+                        <hr>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            {{ form | crispy }}
+                            <hr>
+                            <a href="{% url 'index' %}">Volver al Home</a> |
+                            <a href="{% url 'register' %}">Registrate</a>
+                            <input type="submit" value="Ingresar" class="btn btn-success btn-lg float-end">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
