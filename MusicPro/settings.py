@@ -26,6 +26,12 @@ SECRET_KEY = 'django-insecure-!w1r2of_&0k*fxg=f-twi8cy#7x@5l)&l-hq%4#o7v$#o2sx95
 DEBUG = True
 
 ALLOWED_HOSTS = []
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
+
+LOGIN_REDIRECT_URL = '/'  # Ruta de redirección después de iniciar sesión correctamente
+LOGOUT_REDIRECT_URL = '/'
+
+
 
 
 # Application definition
@@ -90,9 +96,16 @@ WSGI_APPLICATION = 'MusicPro.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': '127.0.0.1:1521/xe',
+        'USER': 'MusicPro',
+        'PASSWORD': 'MusicPro1234',
+        'TEST':{
+            'USER': 'default_test',
+            'TBLSPACE': 'default_test_tbls',
+            'TBLSPACE': 'default_test_tbls_tmp',
+        },
+    },
 }
 
 

@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+{% load crispy_forms_tags %}
+<br>
+<div class="card container-fluid">
+    <div class="card-body">
+            <h3 class="text-center">Lista de productos</h3>
+                <div>
+                  <form method="get">
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="Escribe aqui para buscar" name="buscar">
+                      <button class="btn btn-outline-success" type="submit" id="button-addon2">Buscar</button>
+                    </div>
+                  </form>
+                </div>
+          <div class="row">
+                <table class="table table-hover table-responsive-sm">
+                      <thead class="table-dark">
+                        <tr>
+                          <td>Id producto</td>
+                          <td>Nombre Producto</td>
+                          <td>Precio producto</td>
+                          <td>Opciones</td>
+                        </tr>
+                      </thead>
+                      {% for pro in productos %}
+                        <tr>
+                          <td>{{pro.idProducto}}</td>
+                          <td>{{pro.nombreProducto}}</td>
+                          <td>{{pro.precioProducto}}</td>
+                          <td>
+                            {% if perms.core.change_productos %}
+                            <a class="btn btn-outline-primary btn-sm" href="{% url 'form_mod_productos' pro.idProducto %}">Modificar</a>
+                            {% endif %}
+                            {% if perms.core.delete_productos %}
+                            <a class="btn btn-outline-danger btn-sm" href="{% url 'form_del_productos' pro.idProducto %}">Eliminar</a>
+                            {% endif %}
+                          </td>  
+                        </tr>
+                      {% endfor %}
+                </table>
+                <hr>
+                <div>
+                {% include 'core/paginator.html' %}
+                </div>
+          </div>
+    </div>
+</div>
+{% endblock %}
+
+ 
+    
+
