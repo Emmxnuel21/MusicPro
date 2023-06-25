@@ -5,3 +5,4 @@ from .models import productos, ventas
 admin.site.register(Permission)
 admin.site.register(productos)
 admin.site.register(ventas)
+

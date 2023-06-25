@@ -7,7 +7,7 @@
 <br>
 <div class="card container-fluid">
     <div class="card-body">
-            <h3 class="text-center">Servicio de bodega</h3>
+            <h3 class="text-center">Nuestras Guitarras</h3>
                 <div>
                   <form method="get">
                     <div class="input-group mb-3">
@@ -17,36 +17,34 @@
                   </form>
                 </div>
           <div class="row">
+            {% for pro in productos %}
                 <table class="table table-hover table-responsive-sm">
                       <thead class="table-dark">
                         <tr>
-                          <td>Serie Producto</td>
+                          <td>Imagen</td>
                           <td>Marca Producto</td>
-                          <td>Codigo Producto</td>
                           <td>Nombre Producto</td>
-                          <td>Fecha Producto</td>
+                          <td>Codigo Producto</td>
                           <td>Valor Producto</td>
-                          <td>Opciones</td>
+                          <td>Comprar Producto</td>
                         </tr>
                       </thead>
-                      {% for pro in productos %}
                         <tr>
-                          <td>{{pro.serie}}</td>
+                          <td><img src="{% static 'core/img/guitarra1.jpg' %}" alt="guitarra"></td>
                           <td>{{pro.marca}}</td>
-                          <td>{{pro.codigo}}</td>
                           <td>{{pro.nombre}}</td>
-                          <td>{{pro.fecha}}</td>
-                          <td>{{pro.valor}}</td>
+                          <td>KDU: {{pro.codigo}}</td>
+                          <td>$ {{pro.valor}}</td> 
                           <td>
-                            {% if perms.core.change_productos %}
-                            <a class="btn btn-outline-primary btn-sm" href="{% url 'form_mod_productos' pro.serie %}">Modificar</a>
-                            {% endif %}
-                            {% if perms.core.delete_productos %}
-                            <a class="btn btn-outline-danger btn-sm" href="{% url 'form_del_productos' pro.serie %}">Eliminar</a>
-                            {% endif %}
-                          </td>  
+                            <br>
+                            <form action="{{ response.url }}" method="POST">
+                            <input type="hidden" name="token_ws" value="{{ response.token }}">
+                            <input class="btn btn-outline-success btn-sm" type="submit" value="Ejecutar Pago con Webpay">
+                            </form>
+                            <br>
+                          </td>
                         </tr>
-                      {% endfor %}
+              {% endfor %}
                 </table>
                 <hr>
                 <div>

@@ -1,16 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class productos(models.Model):
-    idProducto =models.IntegerField(primary_key=True, verbose_name='Id Producto')
-    nombreProducto =models.CharField(max_length=50,verbose_name='Nombre del Producto')
-    precioProducto =models.IntegerField(verbose_name='Precio del Producto')
+    serie =models.IntegerField(primary_key=True, verbose_name='Serie Producto')
+    marca =models.CharField(max_length=50,verbose_name='Marca del Producto')
+    codigo =models.CharField(max_length=50,verbose_name='Codigo del Producto')
+    nombre =models.CharField(max_length=50,verbose_name='Nombre del Producto')
+    fecha = models.DateTimeField(verbose_name='Fecha del Producto')
+    valor = models.IntegerField(verbose_name='Precio del Producto')
+
     def __str__(self):
-        return self.nombreProducto
-    
+        return self.nombre
+
 class ventas(models.Model):
     idVenta =models.IntegerField(primary_key=True, verbose_name='Id Venta')
-    productosVendidos =models.CharField(max_length=50,verbose_name='Nombre de los Productos')
-    totalVenta =models.IntegerField(verbose_name='Precio final de compra')
+    productosVendidos =models.ForeignKey(productos, on_delete=models.CASCADE)
+    totalVenta = models.IntegerField(verbose_name='Precio del Producto')
+
     def __str__(self):
-        return self.producto1    
+        return str(self.idVenta)   
+    
+    def save(self, *args, **kwargs):
+        self.totalVenta = self.productosVendidos.valor
+        super().save(*args, **kwargs)

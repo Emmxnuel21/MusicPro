@@ -36,36 +36,48 @@
           
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page">¿Quienes somos?</a>
-              </li>
-              {% if perms.core.view_productos %}
-              <li class="nav-item">
-                <a href="{% url 'bodega' %}" class="nav-link">Inventario</a>
-              </li>
-              {% endif %}  
-
-              {% if perms.core.view_ventas %}
-              <li class="nav-item">
-                <a href="{% url 'contabilidad' %}" class="nav-link">Contabilidad</a>
-              </li>
-              {% endif %}
-
-              {% if perms.core.view_ventas %}
-              <li class="nav-item">
-                <a href="{% url 'ventas' %}" class="nav-link">Ventas</a>
-              </li>
-              {% endif %}
+              
 
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Nuestros Productos
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item">Componentes</a></li>
-                  <li><a class="dropdown-item"> Repuestos</a></li>
+                  <li><a class="dropdown-item" href="{% url 'guitarras' %}" >Guitarras</a></li>
+                  <li><a class="dropdown-item" href="{% url 'accesorios' %}" >Repuestos</a></li>
                 </ul>
               </li>
+
+              {% if perms.auth.ser_bode %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Inventario
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a href="{% url 'bodega' %}" class="nav-link">Servicio de Inventario</a>
+                  <a href="{% url 'form_add_productos' %}" class="nav-link">Añadir productos</a>
+                </ul>
+              </li>
+              {% endif %}  
+
+              {% if perms.auth.ser_conta %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Contabilidad
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a href="{% url 'contabilidad' %}" class="nav-link">Servicio de contabilidad</a>
+                  <a href="{% url 'form_add_ventas' %}" class="nav-link">Añadir ventas</a>
+                </ul>
+              </li>
+              {% endif %}
+
+              {% if perms.auth.ser_vend %}
+              <li class="nav-item">
+                <a href="{% url 'ventas' %}" class="nav-link">Servicio de Ventas</a>
+              </li>
+              {% endif %}
+
               {% if user.is_authenticated %}  
               <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Cerrar Sesion</a></li> 
               <li class="nav-item"><a href="{% url 'index' %}" class="nav-link">@{{ user.username }}</a></li>  
@@ -78,10 +90,6 @@
               </li>
             </ul>
             {% endif %}
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="¿Que buscas?" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </form>
           </div>
         </div>
       </nav>
@@ -104,7 +112,9 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
       <!-- CSS only -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    
+          <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script  src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     {% block javaScript %}
       
     {% endblock javaScript %}

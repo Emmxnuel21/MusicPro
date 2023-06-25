@@ -1,11 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MusicPro</title>
-</head>
-<body>
-        hola mundo soy contador
-</body>
-</html>
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block contenido %}
+{% load crispy_forms_tags %}
+<br>
+<div class="card container-fluid">
+    <div class="card-body">
+            <h3 class="text-center">Servicio de contabilidad</h3>
+                <div>
+                  <form method="get">
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="Escribe aqui para buscar" name="buscar">
+                      <button class="btn btn-outline-success" type="submit" id="button-addon2">Buscar</button>
+                    </div>
+                  </form>
+                </div>
+          <div class="row">
+                <table class="table table-hover table-responsive-sm">
+                      <thead class="table-dark">
+                        <tr>
+                          <td>Id Venta</td>
+                          <td>Nombre Producto Vendido</td>
+                          <td>Precio producto</td>
+                          <td>Opciones</td>
+                        </tr>
+                      </thead>
+                      {% for ven in ventas %}
+                        <tr>
+                          <td>{{ven.idVenta}}</td>
+                          <td>{{ven.productosVendidos}}</td>
+                          <td>{{ven.totalVenta}}</td>
+                          <td>
+                            {% if perms.core.change_ventas %}
+                            <a class="btn btn-outline-primary btn-sm" href="{% url 'form_mod_ventas' ven.idVenta %}">Modificar</a>
+                            {% endif %}
+                            {% if perms.core.delete_ventas %}
+                            <a class="btn btn-outline-danger btn-sm" href="{% url 'form_del_ventas' ven.idVenta %}">Eliminar</a>
+                            {% endif %}
+                          </td>  
+                        </tr>
+                      {% endfor %}
+                </table>
+                <hr>
+                <div>
+                {% include 'core/paginator_ventas.html' %}
+                </div>
+          </div>
+    </div>
+</div>
+{% endblock %}

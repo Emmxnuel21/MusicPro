@@ -1,0 +1,20 @@
+
+
+<div class="alert alert-warning" role="alert">
+    <h3>request</h3>
+    token_ws: {{ token }}
+</div>
+<div class="alert alert-primary" role="alert">
+    <h3>result</h3>
+    {{ response }}
+</div>
+<p><samp>Pago ACEPTADO por webpay</samp></p>
+<br>
+<form action="/webpay-plus/refund" method="POST">
+    <input type="hidden" name="token_ws" value="{{ token }}">
+    <input type="hidden" name="amount" value="{{ response.amount }}">
+    <input type="submit" class="btn btn-success" value="Reembolsar Transacci&oacute;n (Anular)">
+</form>
+<a href="/">&laquo; volver a index</a>
+</body>
+</html>
